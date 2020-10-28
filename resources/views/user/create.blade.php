@@ -100,7 +100,7 @@
         
                 <div class="form-group">
                     <label >Stream</label>
-                    <select class="form-control" name="subject_stream" value="physical">
+                    <select class="form-control" name="subject_stream" value="physical" onchange="showDiv('nic_div', this)">
                       <option id="physical">Physical</option>
                       <option id="bio">Bio</option>
                       <option id="arts">Arts</option>
@@ -149,7 +149,7 @@
                     {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                 </div>
         
-                <div class="form-row">
+                <div class="form-row" id="nic_div">
 
                     <div class="form-group col-md-6">
                         <label>NIC Front</label>
@@ -218,7 +218,14 @@
     </div>
 
     <script>
-        console.log("1111")
+        function showDiv(divId, element)
+        {
+            if(element.value == 'Physical'||element.value == 'Bio'){
+                document.getElementById(divId).style.display = 'flex';
+            } else {
+                document.getElementById(divId).style.display = 'none';
+            }
+        }
     </script>
 
 @endsection
