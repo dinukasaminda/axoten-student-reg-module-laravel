@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
-            $table->string('school_name');
+            $table->string('school_name')->nullable();
             $table->string('subject_stream');
             $table->string('exam_year');
             $table->string('attempt');
@@ -24,16 +24,17 @@ class CreateUsersTable extends Migration
             $table->string('district');
             $table->string('address');
             $table->string('nic_no')->unique();
-            $table->string('nic_front');
-            $table->string('nic_back');
+            $table->string('nic_front')->nullable();
+            $table->string('nic_back')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('mobile')->unique();
             $table->timestamp('mobile_verified_at')->nullable();
             $table->string('del_mobile_1')->nullable();
             $table->string('del_mobile_2')->nullable();
-            $table->string('password')->nullable();
-            $table->rememberToken();
+            // $table->string('password')->nullable();
+            $table->timestamp('user_verified_at')->nullable();
+            // $table->rememberToken();
             $table->timestamps();
         });
     }

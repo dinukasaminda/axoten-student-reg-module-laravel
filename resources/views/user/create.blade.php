@@ -62,8 +62,28 @@
     <div class="card" style="margin-top: 30px; max-width: 720px; margin-bottom: 30px;">
         <h5 class="card-header">Student Registration</h5>
         <div class="card-body">
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> {{ $message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             {{-- <h5 class="card-title">Special title treatment</h5> --}}
-            <form action="/" method="POST" >
+            <form action="{{ route('student.store') }}" method="POST" id="form1" enctype="multipart/form-data" >
                 @csrf
         
                 <div class="form-group">
@@ -134,10 +154,12 @@
                     <div class="form-group col-md-6">
                         <label>NIC Front</label>
                         <input type="file" class="form-control-file" name="nic_front">
+                        <small class="form-text text-muted">Maximum File Size : 15Mb</small>
                     </div>
                     <div class="form-group col-md-6">
                         <label>NIC Back</label>
                         <input type="file" class="form-control-file" name="nic_back">
+                        <small class="form-text text-muted">Maximum File Size : 15Mb</small>
                     </div>
 
                 </div>
@@ -151,7 +173,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label>Confirm email</label>
-                        <input type="email" class="form-control" placeholder="Confirm your email address" name="email_conf">
+                        <input type="email" class="form-control" placeholder="Confirm your email address" name="email_confirmation">
                         {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                     </div>
 
@@ -166,10 +188,21 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label>Confirm Mobile Number</label>
-                        <input type="text" class="form-control" placeholder="Confirm your mobile number" name="mobile_conf">
+                        <input type="text" class="form-control" placeholder="Confirm your mobile number" name="mobile_confirmation">
                         {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                     </div>
 
+                </div>
+
+                <div class="form-group">
+                    <label>Delivery Phone Numbers</label>
+                    <input type="text" class="form-control" placeholder="Enter a mobile number" max="12" name="del_mobile_1">
+                    {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Enter a another mobile number" max="12" name="del_mobile_2">
+                    {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                 </div>
         
                 {{-- <div class="form-group">
@@ -177,16 +210,15 @@
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div> --}}
         
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-        
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" class="btn btn-primary">Register</button>
         
               </form>
           
         </div>
     </div>
+
+    <script>
+        console.log("1111")
+    </script>
 
 @endsection
